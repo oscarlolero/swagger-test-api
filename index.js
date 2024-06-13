@@ -2,6 +2,7 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger.json' assert { type: 'json' };
 import {getAvailabilityFromMonth} from "./utils.js"
+const port = process.env.PORT || 4000;
 
 const app = express();
 
@@ -12,6 +13,6 @@ app.use('/api/listing-availability', async (req, res) => {
   console.log("Available dates:", availableDates)
   res.json(availableDates)
 })
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
+app.listen(port, () => {
+  console.log('Listening on port ' + port);
 });
