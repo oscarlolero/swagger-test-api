@@ -13,6 +13,13 @@ app.use('/api/listing-availability', async (req, res) => {
   console.log("Available dates:", availableDates)
   res.json(availableDates)
 })
+
+//serve swagger.json file endpoint
+app.get('/swagger.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerDocument);
+});
+
 app.listen(port, () => {
   console.log('Listening on port ' + port);
 });
