@@ -1,0 +1,80 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Listing Availability API",
+    "description": "API to check the availability of a listing in a given month",
+    "termsOfService": "http://swagger.io/terms/",
+    "license": {
+      "name": "Licencia MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/listing-availability": {
+      "get": {
+        "summary": "Gets the listing availability in a given month",
+        "description": "Returns the availability of a listing for a specified month",
+        "parameters": [
+          {
+            "name": "listingId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "ID of the listing",
+            "example": "5"
+          },
+          {
+            "name": "yearMonth",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Year and month for which to check availability in YYYY-MM format",
+            "example": "2024-06"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Listing availability dates",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "example": [1, 2, 5, 10, 15, 20]
+            }
+          },
+          "400": {
+            "description": "Invalid parameters"
+          },
+          "404": {
+            "description": "Listing not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Availability": {
+      "type": "object",
+      "properties": {
+        "days": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "Array of available days",
+          "example": [1, 2, 5, 10, 15, 20]
+        }
+      }
+    }
+  }
+}
