@@ -1,5 +1,5 @@
 {
-  "swagger": "2.0",
+  "swagger": "3.0.2",
   "info": {
     "version": "1.0.0",
     "title": "Listing Availability API",
