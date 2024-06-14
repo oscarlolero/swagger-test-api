@@ -1,5 +1,5 @@
 {
-  "swagger": "3.0.2",
+  "openapi": "3.0.2",
   "info": {
     "version": "1.0.0",
     "title": "Listing Availability API",
@@ -10,10 +10,10 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "swagger-test-api.onrender.com",
-  "basePath": "/api",
-  "schemes": [
-    "https"
+  "servers": [
+    {
+      "url": "https://swagger-test-api.onrender.com/api"
+    }
   ],
   "paths": {
     "/listing-availability": {
@@ -25,31 +25,36 @@
             "name": "listingId",
             "in": "query",
             "required": true,
-            "type": "string",
-            "description": "ID of the listing",
-            "example": "5"
+            "schema": {
+              "type": "string",
+              "example": "5"
+            },
+            "description": "ID of the listing"
           },
           {
             "name": "yearMonth",
             "in": "query",
             "required": true,
-            "type": "string",
-            "description": "Year and month for which to check availability in YYYY-MM format",
-            "example": "2024-06"
+            "schema": {
+              "type": "string",
+              "example": "2024-06"
+            },
+            "description": "Year and month for which to check availability in YYYY-MM format"
           }
-        ],
-        "produces": [
-          "application/json"
         ],
         "responses": {
           "200": {
             "description": "Listing availability dates",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              },
-              "example": [1, 2, 5, 10, 15, 20]
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "example": [1, 2, 5, 10, 15, 20]
+                }
+              }
             }
           },
           "400": {
@@ -62,17 +67,19 @@
       }
     }
   },
-  "definitions": {
-    "Availability": {
-      "type": "object",
-      "properties": {
-        "days": {
-          "type": "array",
-          "items": {
-            "type": "number"
-          },
-          "description": "Array of available days",
-          "example": [1, 2, 5, 10, 15, 20]
+  "components": {
+    "schemas": {
+      "Availability": {
+        "type": "object",
+        "properties": {
+          "days": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "description": "Array of available days",
+            "example": [1, 2, 5, 10, 15, 20]
+          }
         }
       }
     }
